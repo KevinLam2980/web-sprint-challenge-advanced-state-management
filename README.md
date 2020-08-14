@@ -24,10 +24,21 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What problem does the context API help solve?
+It solves the problem of keeping all needed state items in a single place, that can then be distributed throughout a large app, keeping all the state of that portion of the poject neat and orderly.
+
 2. In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+Actions are used to tell the app what to do, and what it needs to do.
+reducers allow all case senerios to be put together, and have a controlled and predictable outcome when it comes to updating the state object
+The store, stores the state object, it is known as the single source of truth as everything on the store is what is displayed on your react-redux app. Any changes made to the store will update your app, anything that does not change the store, will fail to update your app state object.
+
 3. What is the difference between Application state and Component state? When would be a good time to use one over the other?
+Application state is the state of the entire app, where as component state is specific to certain components. A good case senerio would be for form data, it would be a little unessesary to have to update the entire state object every onChange, where as application state is useful for re-rendering and altering things that are displayed on the screen, or if the app is loading or in an error state. 
+
 4. Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+Action creators HAVE to return an objct, thunk allows actions to return a functino which can recieve the store's dispatch method. 
+
 5. What is your favorite state management system you've learned and this sprint? Please explain why!
+Redux, after working more and more on state hooks and what not, I really began to wonder if there was a way to keep all the state in one spot, as the states were easy to loose track of in an ocean of files, redux and global state management fixed all of that for me.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade. 
 
@@ -51,10 +62,14 @@ You are expected to be able to answer questions in these areas. Your responses c
 
 Your finished project must include all of the following requirements:
 
-- [ ] Plan and implement how you are going to manage your state for your application
-- [ ] You _must_ use Redux as your state management system
-- [ ] Once you have planned out your state management system, fetch data from the smurf server and display the data it returns
-- [ ] Add a form to collect info for a new smurf, and make a POST request to the server to add a new smurf to your village
+- [x] Plan and implement how you are going to manage your state for your application
+
+I shall endure the struggles and hardships of the challenge faced before me by my Team Lead to use redux hooks for the first time ever on a sprint challenge.
+First I shall create my initial state and reducer, then I shall import it into my index.js where I shall wrap thy app inside a provider, create a store in which to pass into thus said provider, and induce the use of middleware. After that I would go on to create my axios get request to the server to display whatever smurfs remain in this world and display him on my screen as the first victory for today's assignment. After that I will create a way to add more smurf trophies to my screen by creating a form that submits a post request to the local server known as 3333 smurfs. In order to achieve such a conquest, I first must create a reducer that will handle and update the state object. Once it is all complete, My app should be working.
+
+- [x] You _must_ use Redux as your state management system
+- [x] Once you have planned out your state management system, fetch data from the smurf server and display the data it returns
+- [x] Add a form to collect info for a new smurf, and make a POST request to the server to add a new smurf to your village
 
 In your solution, it is essential that you follow best practices and produce clean and professional results. You will be scored on your adherence to proper code style and good organization. Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work. It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 
