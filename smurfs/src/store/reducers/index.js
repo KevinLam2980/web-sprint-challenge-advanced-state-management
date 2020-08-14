@@ -28,7 +28,6 @@ export const smurfsReducer = (state = initialState, action) => {
               ...state,
               isLoading: false,
               errors: action.payload,
-              smurfs: []
             };
       default:
         return state;

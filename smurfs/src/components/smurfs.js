@@ -1,25 +1,8 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {FETCHING_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE} from '../store/reducers/index'
-import axios from 'axios'
 
 const Smurfs = props => {
-    const dispatch = useDispatch()
     const smurfs = useSelector(state => state.smurfs)
-
-
-    useEffect(() => {
-        dispatch({type: FETCHING_SMURFS_START})
-        axios.get('http://localhost:3333/smurfs')
-        .then(res => {
-            console.log(res)
-            dispatch({type: FETCH_SMURFS_SUCCESS, payload: res.data})
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch({type: FETCH_SMURFS_FAILURE, payload: err})
-        })
-    }, [])
 
     return (
         <div>

@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {FETCHING_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE} from '../store/reducers/index'
-
 
 const initialFormValues = {
     name: '',
@@ -11,72 +10,67 @@ const initialFormValues = {
     id: Date.now()
 }
 
-const SmurfForm = props => {
+const SmurfForm = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const dispatch = useDispatch()
-    const smurfs = useSelector(state => state.smurfs)
-    const isLoading = useSelector(state => state.isLoading)
-    const errors = useSelector(state => state.errors)
-
-
 
     const onHandleChanges = evt => {
         setFormValues({...formValues, [evt.target.name]: evt.target.value})
     }
 
-    const submit = (e) => {
+    const submitHandler = (e) => {
         e.preventDefault()
-        dispatch({type : FETCHING_SMURFS_START})
+        console.log('from submit')
+        console.log(formValues)
+        dispatch({type: FETCHING_SMURFS_START})
         axios.post('http://localhost:3333/smurfs', formValues)
         .then(res => {
             console.log(res)
-            dispatch({type:FETCH_SMURFS_SUCCESS, payload: res.data })
+            dispatch({type: FETCH_SMURFS_SUCCESS, payload: res.data})
         })
         .catch(err => {
             console.log(err)
-            dispatch({type: FETCH_SMURFS_FAILURE, payload: err.message})
+            dispatch({type: FETCH_SMURFS_FAILURE, payload: err})
         })
     }
 
-    return(
-        <div>
-            <form onSubmit={() => submit}>
-                <label htmlFor='name'>Name:
-                    <input
-                    id='name'
-                    name='name'
-                    type='text'
-                    placeholder='Enter smurf name'
-                    onChange={onHandleChanges}
-                    value={formValues.name}
-                    ></input>
-                </label>
-            </form>
-            <form>
-                <label htmlFor='age'>age:
-                    <input
-                    id='age'
-                    name='age'
-                    type='number'
-                    placeholder='Enter smurf age'
-                    onChange={onHandleChanges}
-                    value={formValues.age}
-                    ></input>
-                </label>
-                <label htmlFor='height'>height:
-                    <input
-                    id='height'
-                    name='height'
-                    type='text'
-                    placeholder='Enter smurf height'
-                    onChange={onHandleChanges}
-                    value={formValues.height}
-                    ></input>
-                </label>
-                <button type='submit'>Submit</button>
-            </form>
-        </div>
-    )
+    return (
+        <form onSubmit={submitHandler} >
+          <h2>Register your smurf here</h2>
+          <label htmlFor='smurfName' >
+            Smurf Name:
+            <input 
+                id='smurfName'
+                name='name' 
+                value={formValues.name} 
+                onChange={onHandleChanges} 
+                placeholder="enter smurf name"
+            />
+          </label>
+          <label htmlFor='smurfAge' >
+            Smurf Age:
+            <input 
+                id='smurfAge'
+                name='age' 
+                value={formValues.age} 
+                onChange={onHandleChanges} 
+                placeholder="enter smurf age"
+            />
+          </label>
+          <label htmlFor='smurfHeight' >
+            Smurf Height:
+            <input 
+                id='smurfHeight'
+                name='height' 
+                value={formValues.height} 
+                onChange={onHandleChanges} 
+                placeholder="enter smurf height"
+            />
+          </label>
+          <button type='submit'>Add Smurf</button>
+        </form>
+      )
+
 }
 
 export default SmurfForm
